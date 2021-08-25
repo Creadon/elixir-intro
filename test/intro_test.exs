@@ -77,4 +77,32 @@ defmodule IntroTest do
   test "Expect first list item" do
     assert Intro.first([0, 1, 2, 3]) == 0
   end
+
+  test "Expect last item in list" do
+    assert Intro.last([0, 123, "abc"]) == "abc"
+  end
+
+  test "Expect full list, prepend" do
+    assert Intro.prepend(0, [123, "abc"]) == [0, 123, "abc"]
+  end
+
+  test "Expect full list, append" do
+    assert Intro.append([123, "abc"], 0) == [123, "abc", 0]
+  end
+
+  test "Expect list length of 3" do
+    assert Intro.listLength([0, 0, 0]) == 3
+  end
+
+  test "Expect sum of 10" do
+    assert Intro.sum([4, 4, 2]) == 10
+  end
+
+  test "Expect average of 10" do
+    assert Intro.average([8, 12, 14, 6]) == 10
+  end
+
+  test "Concat two lists together" do
+    assert Intro.concat([1, 2], [3, 4]) == [1, 2, 3, 4]
+  end
 end

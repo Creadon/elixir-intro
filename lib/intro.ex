@@ -26,4 +26,29 @@ defmodule Intro do
   def empty(list), do: length(list) == 0
 
   def first([head | _tail]), do: head
+
+  def last([head | tail]) when tail === [], do: head
+  def last([_head | tail]), do: last(tail)
+
+  def prepend(input, list), do: [input | list]
+
+  # fungerande funktion
+  #def append(list, input), do: list ++ [input]
+
+  # todo: fixa skiten
+  def append(list, input), do: [list | [input]]
+
+  def listLength([]), do: 0
+  def listLength([_head | tail]), do: 1 + listLength(tail)
+
+  def sum([]), do: 0
+  def sum([head | tail]), do: head + sum(tail)
+
+  def average([]), do: 0
+  def average(list), do: sum(list) / listLength(list)
+
+  def concat([], []), do: []
+  def concat(list1, []), do: list1
+  def concat([], list2), do: list2
+  def concat(list1, [head | tail]), do: concat(append(list1, head), tail)
 end
