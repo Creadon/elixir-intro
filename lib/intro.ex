@@ -32,11 +32,8 @@ defmodule Intro do
 
   def prepend(input, list), do: [input | list]
 
-  # fungerande funktion
-  #def append(list, input), do: list ++ [input]
-
-  # todo: fixa skiten
-  def append(list, input), do: [list | [input]]
+  def append([], input), do: [input]
+  def append([head | tail], input), do: [head | append(tail, input)]
 
   def listLength([]), do: 0
   def listLength([_head | tail]), do: 1 + listLength(tail)
