@@ -25,8 +25,10 @@ defmodule Intro do
 
   def empty(list), do: length(list) == 0
 
+  def first([]), do: []
   def first([head | _tail]), do: head
 
+  def last([]), do: []
   def last([head | tail]) when tail === [], do: head
   def last([_head | tail]), do: last(tail)
 
@@ -36,7 +38,7 @@ defmodule Intro do
   def append([head | tail], input), do: [head | append(tail, input)]
 
   def listLength([]), do: 0
-  def listLength([_head | tail]), do: 1 + listLength(tail)
+  def listLength([_head | tail]), do: listLength(tail) + 1
 
   def sum([]), do: 0
   def sum([head | tail]), do: head + sum(tail)
@@ -48,4 +50,21 @@ defmodule Intro do
   def concat(list1, []), do: list1
   def concat([], list2), do: list2
   def concat(list1, [head | tail]), do: concat(append(list1, head), tail)
+
+  def startsWith(first, text), do: first === hd String.graphemes(text)
+
+  def endsWith(last, text), do: last == last(String.graphemes(text))
+
+  def chomp(text) do
+    cond do
+      endsWith("\n", text) == true -> removeLast(text)
+      true -> text
+    end
+  end
+
+  # todo: fixa skiten
+  def removeLast(text, acc \\ 0)
+  def removeLast(text, acc), do: removeLast(String.graphemes(text), [], acc, listLength(String.graphemes(text)) - 1)
+  def removeLast(_text, newtext, acc, textlength) when acc == textlength, do: List.to_string(newtext)
+  def removeLast([head | tail], newtext, acc, textlength) when acc < textlength, do: removeLast(tail, append(newtext, head), acc + 1, textlength)
 end
