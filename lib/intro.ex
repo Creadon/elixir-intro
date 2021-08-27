@@ -62,9 +62,8 @@ defmodule Intro do
     end
   end
 
-  # todo: fixa skiten
-  def removeLast(text, acc \\ 0)
-  def removeLast(text, acc), do: removeLast(String.graphemes(text), [], acc, listLength(String.graphemes(text)) - 1)
-  def removeLast(_text, newtext, acc, textlength) when acc == textlength, do: List.to_string(newtext)
-  def removeLast([head | tail], newtext, acc, textlength) when acc < textlength, do: removeLast(tail, append(newtext, head), acc + 1, textlength)
+  def removeLast(input, acc \\ 0)
+  def removeLast(input, _acc), do: removeLast(String.graphemes(input), [], listLength(String.graphemes(input)) - 1)
+  def removeLast(_list, text, acc) when acc == 0, do: List.to_string(text)
+  def removeLast([head | tail], text, acc) when acc > 0, do: removeLast(tail, append(text, head), acc - 1)
 end
